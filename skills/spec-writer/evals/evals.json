@@ -1,0 +1,63 @@
+{
+  "skill_name": "spec-writer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "hi, I'm the ops lead for our UK road freight team. customers keep ringing the service desk asking \"where's my delivery\" when a truck is running late - it's like 30% of our calls some weeks. I want the system to automatically email the customer when a delivery is going to be late. can you write this up as a spec I can hand to the dev team? I'm in meetings all afternoon so just draft it and flag whatever you need from me.",
+      "expected_output": "A Markdown spec file for proactive late-delivery emails, written without any codebase. It separates\nconfirmed facts from stated facts and assumptions, does not invent system internals as facts, puts\ntechnical unknowns as questions for engineering, has testable Given/When/Then acceptance criteria,\nexplicit decisions with recommendations (e.g. what counts as \"late\"), edge cases, out of scope,\nrollout/undo, and success measures tied to the 30% call volume.",
+      "files": [],
+      "assertions": [
+        "A Markdown spec file is saved",
+        "The spec has numbered acceptance criteria written in Given/When/Then form",
+        "Every acceptance criterion names the gap or requirement it covers",
+        "Statements about the current situation are each explicitly labelled as confirmed, stated by someone, or an assumption",
+        "The spec has a decisions section in which each decision has a recommendation and a named decider/owner",
+        "The spec defines 'late' with a concrete numeric threshold",
+        "The spec has an out-of-scope section",
+        "The spec states how to switch the feature off / undo it",
+        "The spec has a success measure that uses the ~30% call share as a baseline and sets a target"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I'm the product owner for our internal HR tools. Managers keep complaining that at month end they have to approve leave requests one by one - some have 40 direct reports. I'd like a spec for letting managers approve leave requests in bulk, so I can hand it to our two developers. The app's code is in the leave-app folder. I won't be able to answer questions until tomorrow, so go ahead and draft it.",
+      "expected_output": "A Markdown spec for manager bulk approval that is grounded in the leave-app code: it cites files\n(and ideally lines), discovers the existing HR-admin bulk_approve in admin.py and that it skips the\naudit log, balance check, direct-report check and emails (breaking README rules), applies the four\nREADME rules to the new design, handles partial failure (some requests fail balance), email volume\nvs the 60/minute SMTP limit, and has testable acceptance criteria and decisions.",
+      "files": [
+        "evals/files/leave-app/README.md",
+        "evals/files/leave-app/admin.py",
+        "evals/files/leave-app/models.py",
+        "evals/files/leave-app/notify.py",
+        "evals/files/leave-app/routes.py"
+      ],
+      "assertions": [
+        "A Markdown spec file is saved",
+        "The spec identifies the existing HR-admin bulk_approve endpoint in admin.py",
+        "The spec states that the existing bulk_approve skips the audit log (README rule 1)",
+        "The spec cites code locations with file and line numbers (e.g. routes.py:NN)",
+        "The spec defines behaviour when some requests in a batch fail (partial failure)",
+        "The spec addresses the 60 emails/minute SMTP limit from notify.py",
+        "The spec has numbered acceptance criteria written in Given/When/Then form",
+        "Every acceptance criterion names the gap or requirement it covers",
+        "The spec has a decisions section in which each decision has a recommendation and a named decider/owner"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Our BA wrote the attached spec for invoice downloads in the customer portal. Engineering wants to start on it next sprint. Can you review it and tell me if it's ready to go? Please save your review as a file too.",
+      "expected_output": "A saved review of the invoice spec with a clear verdict (not ready), item-by-item findings with\nquotes from the spec as evidence: no testable acceptance criteria, vague terms (\"fast\",\n\"user-friendly\", \"last invoices\"), unverified assumptions stated as facts (SAP PDFs in SharePoint;\nfinance no longer handling emails), no out of scope, no decisions, missing edge cases (multi-account\nusers, credit notes, missing PDFs), and access-control/personal-data questions. Offers a retrofit\nrather than silently rewriting.",
+      "files": [
+        "evals/files/invoice-download-spec.md"
+      ],
+      "assertions": [
+        "A review file is saved and the input spec is unchanged",
+        "The review gives an explicit verdict that the spec is not ready",
+        "The review flags the contradiction between linking SharePoint PDFs and fetching from the SAP API",
+        "The review flags vague, untestable wording such as 'fast' and 'user-friendly'",
+        "The review flags the absence of acceptance criteria",
+        "The review scores the spec item by item against named criteria, quoting the spec as evidence",
+        "The review flags 'Finance will no longer need to handle invoice emails' as an outcome/assumption rather than a buildable requirement",
+        "The review proposes default answers or a retrofit for the open decisions rather than only listing problems"
+      ]
+    }
+  ]
+}

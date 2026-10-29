@@ -1,0 +1,3 @@
+def send_decision_email(employee, leave_request):
+    """Send one email per decision. Uses the company SMTP relay (rate limit: 60 emails/minute)."""
+    ...
